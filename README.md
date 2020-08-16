@@ -5,4 +5,3 @@ This code sample builds the backend API and the frontend for a React Native app 
 3) View an overall summary of his or her meetings for the month, such as which social circle and people he/she met with the most
 
 You can find a demo of this app here: https://youtu.be/890lO-UDxJA
-View Demo Here: https://youtu.be/890lO-UDxJA
