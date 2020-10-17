@@ -22,16 +22,16 @@ const MeetingsScreen = ({navigation}) =>  {
             setIsLoading(false);
         }
         
-        fetchData();
+        //fetchData();
 
-        const listener = navigation.addListener('willFocus', () => { // refresh every time we return to the screen
+        const listener = navigation.addListener('didFocus', () => { // refresh every time we return to the screen
             fetchData();
         });
         
         return () => { // clean up to prevent memory leak
             listener.remove();
         }
-    }, []);
+    }, [navigation]);
 
 
     return (
