@@ -26,6 +26,18 @@ const DashboardScreen = ({navigation}) =>  {
     }
     
     useEffect(() => {
+        const fetchData = async () => {
+            setIsLoading(true);
+            await fetchPeople(); // 1st time we show screen
+            await fetchMeetings();
+            setIsLoading(false);
+        }
+        
+        fetchData();
+
+    }, []);
+
+    useEffect(() => {
 
         const fetchData = async() => {
             setIsLoading(true);
@@ -35,9 +47,7 @@ const DashboardScreen = ({navigation}) =>  {
             setIsLoading(false);
         }
         
-        fetchData();
-
-        const listener = navigation.addListener('willFocus', () => { // refresh every time we return to the screen
+        const listener = navigation.addListener('didFocus', () => { // refresh every time we return to the screen
             fetchData();
         });
         
@@ -45,7 +55,7 @@ const DashboardScreen = ({navigation}) =>  {
             listener.remove();
         }
 
-    }, []);
+    }, [navigation]);
 
     return (
         <View style={{flex: 1, backgroundColor: "white"}}>
@@ -55,7 +65,7 @@ const DashboardScreen = ({navigation}) =>  {
             </View>
             : 
             <View>
-                {peopleState.length == 0 || meetingState.length == 0 || categoryState == 0
+                {peopleState.length == 0 || meetingState.length == 0 || categoryState.length == 0
                 ? <View style={styles.initialContainer}>
                     <Text style={styles.initialMessage}> Add meetings and people to track your social circle! </Text>
                 </View>
